@@ -72,4 +72,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # Hirarcy flow chart
     - FilterableProductTable -->    Searchbar >>>   SearchBar
                                               >>>   FilterButton
-                             -->    ProductCatogariTable  -->   ProductCatogariRows >>> ProductRows       
+                             -->    ProductCatogariTable  -->   ProductCatogariRows >>> ProductRows     
+
+# Stntax doughts
+
+    - either the table cannot be rendered as a list or there must be a syntax such that table element will render props to appropriate fields 
+
+# Learnings
+
+    - const variables must be initilized in declaration only

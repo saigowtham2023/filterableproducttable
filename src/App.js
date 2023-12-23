@@ -33,12 +33,12 @@ function ProductTable({ products }) {
   })
   return (
     <table>
-      <th>
+      <thead>
         <tr>
-          <td>Name</td>
-          <td>Price</td>
+          <th>Name</th>
+          <th>Price</th>
         </tr>
-      </th>
+      </thead>
       <tbody>
         {rows}
       </tbody>
@@ -51,20 +51,20 @@ function SearchBar() {
   return (
     <form>
       <input type="text" placeholder="Search..." />
-      <lable>
+      <label>
         <input type="checkbox" />
         {' '}Only display avalable stock
-      </lable>
+      </label>
     </form>
   );
 }
 
 
-function FilterableProductTable({ PRODUCTS }) {
+function FilterableProductTable({ products }) {
   return (
     <>
       <SearchBar />
-      <ProductTable products={PRODUCTS} />
+      <ProductTable products={products} />
     </>
   );
 }
@@ -81,5 +81,5 @@ const PRODUCTS = [
 
 
 export default function App() {
-  return <FilterableProductTable pruduct={PRODUCTS} />;
+  return <FilterableProductTable products={PRODUCTS} />;
 }

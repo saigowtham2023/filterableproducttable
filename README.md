@@ -81,3 +81,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # Learnings
 
     - const variables must be initilized in declaration only
+
+# 2) Static version
+   
+   - not able to render table because of typo at parameters to FilterableProductTable element and the auto correce also not showing error there, so it became difficult

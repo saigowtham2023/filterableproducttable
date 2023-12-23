@@ -1,7 +1,11 @@
 function ProductRow({ product }) {
+  const name = product.stocked ? product.name :
+    <span style={{ color: 'red' }}>
+      {product.name}
+    </span>
   return (
     <tr>
-      <td>{product.name}</td>
+      <td>{name}</td>
       <td>{product.price}</td>
     </tr>
   );
@@ -71,8 +75,8 @@ function FilterableProductTable({ products }) {
 
 
 const PRODUCTS = [
-  { category: "Fruits", price: "S1", stocked: true, name: "Apple" },
-  { category: "Fruits", price: "S1", stocked: true, name: "Dragonfruit" },
+  { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
+  { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
   { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
   { category: "Vegetables", price: "$2", stocked: true, name: "Spinach" },
   { category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin" },

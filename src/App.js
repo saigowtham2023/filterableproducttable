@@ -39,8 +39,8 @@ function ProductTable({ products, searchText, ticked }) {
         let count = 0;
         for (let i = 0; i < product.name.length - searchText.length + 1; i++) {
           for (let j = 0; j < searchText.length; j++) {
-            sample = product.name[i + j]
-            if ('product.name[i + j]'.charCodeAt(0) === 'searchText[j]'.charCodeAt(0)) {
+            sample = product.name[i + j].charCodeAt(0)
+            if (product.name[i + j].charCodeAt(0) === searchText[j].charCodeAt(0) || product.name[i + j].charCodeAt(0) + 32 === searchText[j].charCodeAt(0) || product.name[i + j].charCodeAt(0) === searchText[j].charCodeAt(0) + 32) {
               count++;
             }
             else {
@@ -107,7 +107,7 @@ function SearchBar({ searchText, ticked }) {
 
 
 function FilterableProductTable({ products }) {
-  const [searchText, setSearchText] = useState('fruit');
+  const [searchText, setSearchText] = useState('ag');
   const [ticked, setTicked] = useState(false);
   return (
     <>

@@ -88,17 +88,19 @@ function ProductTable({ products, searchText, ticked }) {
 }
 
 
-function SearchBar({ searchText, ticked }) {
+function SearchBar({ searchText, ticked, setSearchText, setTicked }) {
   return (
     <form>
       <input
         type="text"
         value={searchText}
-        placeholder="Search..." />
+        placeholder="Search..."
+        onChange={(e) => setSearchText(e.target.value)} />
       <label>
         <input
           type="checkbox"
-          checked={ticked} />
+          checked={ticked}
+          onChange={(e) => setTicked(e.target.checked)} />
         {' '}Only display avalable stock
       </label>
     </form>
@@ -107,13 +109,15 @@ function SearchBar({ searchText, ticked }) {
 
 
 function FilterableProductTable({ products }) {
-  const [searchText, setSearchText] = useState('ag');
+  const [searchText, setSearchText] = useState('');
   const [ticked, setTicked] = useState(false);
   return (
     <>
       <SearchBar
         searchText={searchText}
         ticked={ticked}
+        setSearchText={setSearchText}
+        setTicked={setTicked}
       />
       <ProductTable
         products={products}

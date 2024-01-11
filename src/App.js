@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function ProductRow({ product }) {
   const name = product.stocked ? product.name :
     <span style={{ color: 'red' }}>
@@ -25,15 +27,50 @@ function ProductCategoryRow({ product }) {
 }
 
 
-function ProductTable({ products }) {
+function ProductTable({ products, searchText, ticked }) {
   const rows = []
   let lastCatogery = null
   products.forEach(product => {
-    if (lastCatogery !== product.category) {
-      rows.push(<ProductCategoryRow product={product} />)
+    if (ticked === true && product.stocked === false) {
     }
-    rows.push(<ProductRow product={product} />)
-    lastCatogery = product.category
+    else {
+      if (searchText !== '') {
+        let sample = ''
+        let count = 0;
+        for (let i = 0; i < product.name.length - searchText.length + 1; i++) {
+          for (let j = 0; j < searchText.length; j++) {
+            sample = product.name[i + j].charCodeAt(0)
+            if (product.name[i + j].charCodeAt(0) === searchText[j].charCodeAt(0) || product.name[i + j].charCodeAt(0) + 32 === searchText[j].charCodeAt(0) || product.name[i + j].charCodeAt(0) === searchText[j].charCodeAt(0) + 32) {
+              count++;
+            }
+            else {
+              break
+            }
+          }
+          if (count === searchText.length) {
+            count = 1
+            break
+          }
+          else {
+            count = 0
+          }
+        }
+        if (count) {
+          if (lastCatogery !== product.category) {
+            rows.push(<ProductCategoryRow product={product} />)
+          }
+          rows.push(<ProductRow product={product} />)
+          lastCatogery = product.category
+        }
+      }
+      else {
+        if (lastCatogery !== product.category) {
+          rows.push(<ProductCategoryRow product={product} />)
+        }
+        rows.push(<ProductRow product={product} />)
+        lastCatogery = product.category
+      }
+    }
   })
   return (
     <table>
@@ -51,12 +88,19 @@ function ProductTable({ products }) {
 }
 
 
-function SearchBar() {
+function SearchBar({ searchText, ticked, setSearchText, setTicked }) {
   return (
     <form>
-      <input type="text" placeholder="Search..." />
+      <input
+        type="text"
+        value={searchText}
+        placeholder="Search..."
+        onChange={(e) => setSearchText(e.target.value)} />
       <label>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={ticked}
+          onChange={(e) => setTicked(e.target.checked)} />
         {' '}Only display avalable stock
       </label>
     </form>
@@ -65,10 +109,21 @@ function SearchBar() {
 
 
 function FilterableProductTable({ products }) {
+  const [searchText, setSearchText] = useState('');
+  const [ticked, setTicked] = useState(false);
   return (
     <>
-      <SearchBar />
-      <ProductTable products={products} />
+      <SearchBar
+        searchText={searchText}
+        ticked={ticked}
+        setSearchText={setSearchText}
+        setTicked={setTicked}
+      />
+      <ProductTable
+        products={products}
+        searchText={searchText}
+        ticked={ticked}
+      />
     </>
   );
 }
